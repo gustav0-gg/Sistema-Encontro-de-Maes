@@ -1,0 +1,349 @@
+@font-face {
+    font-family: 'Lexend';
+    src: url('/fonts/Lexend-Regular.ttf');
+}
+
+@font-face {
+    font-family: 'Dancing Script';
+    src: url('/fonts/DancingScript-Regular.ttf');
+}
+
+/* Estilos principais */
+.root {
+    -fx-background-color: #ECE5F0;
+    -fx-font-family: 'Lexend';
+}
+
+/* Barra superior */
+.top-bar {
+    -fx-background-color: #003B36;
+}
+
+/* Botões da barra superior */
+.top-button {
+    -fx-background-color: transparent;
+    -fx-text-fill: white;
+    -fx-font-size: 20px;
+    -fx-font-weight: bold;
+}
+
+.top-button:hover {
+    -fx-text-fill: #B6E2D3;
+    -fx-cursor: hand;
+}
+
+/* Conteúdo central */
+.content {
+    -fx-alignment: top-center;
+    -fx-spacing: 30;
+    -fx-padding: 40;
+}
+
+/* Labels */
+.label-bemvinda {
+    -fx-font-size: 32px;
+    -fx-font-family: 'Dancing Script';
+    -fx-text-fill: #003B36;
+}
+
+.label-aniversariantes {
+    -fx-font-size: 22px;
+    -fx-font-weight: bold;
+}
+
+/* Container da tabela */
+.table-box {
+    -fx-background-color: #CFD0D9;
+    -fx-background-radius: 40;
+    -fx-border-radius: 40;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.15), 12, 0, 0, 2);
+}
+
+/* Tabela de aniversariantes - COMPLETAMENTE TRANSPARENTE */
+.aniversariantes-table {
+    -fx-background-radius: 30;
+    -fx-border-radius: 30;
+    -fx-background-color: transparent;
+    -fx-table-cell-border-color: transparent;
+    -fx-table-header-border-color: transparent;
+}
+
+/* Remove fundo do conteúdo da tabela */
+.aniversariantes-table .column-header-background {
+    -fx-background-color: transparent;
+    -fx-background-radius: 30 30 0 0;
+}
+
+/* Cabeçalho das colunas */
+.aniversariantes-table .column-header {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+    -fx-padding: 10 0 10 0;
+}
+
+/* Texto do cabeçalho em verde */
+.aniversariantes-table .column-header .label {
+    -fx-text-fill: #003B36; /* Verde escuro */
+    -fx-font-weight: bold;
+    -fx-font-size: 16px;
+    -fx-alignment: center;
+    -fx-background-color: transparent;
+}
+
+/* Configuração para fazer as colunas ocuparem todo o espaço */
+.aniversariantes-table .table-column {
+    -fx-alignment: center; 
+    -fx-font-size: 14px;
+    -fx-font-weight: normal;
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+}
+
+/* Células da tabela - completamente transparentes */
+.aniversariantes-table .table-row-cell {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+    -fx-table-cell-border-color: transparent;
+    -fx-background-insets: 0;
+    -fx-padding: 0;
+}
+
+.aniversariantes-table .table-row-cell:odd {
+    -fx-background-color: transparent;
+}
+
+.aniversariantes-table .table-row-cell:even {
+    -fx-background-color: transparent;
+}
+
+.aniversariantes-table .table-row-cell:filled:hover {
+    -fx-background-color: rgba(182, 226, 211, 0.3); /* Verde claro transparente ao passar mouse */
+}
+
+/* Células individuais */
+.aniversariantes-table .table-cell {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+    -fx-padding: 15px;
+    -fx-text-fill: #000000;
+}
+
+/* Remove linhas de foco */
+.aniversariantes-table .table-row-cell:filled:focused {
+    -fx-background-color: transparent;
+    -fx-background-insets: 0;
+    -fx-focus-color: transparent;
+    -fx-faint-focus-color: transparent;
+}
+
+/* Scrollbars da tabela - transparentes */
+.table-view .scroll-bar:vertical,
+.table-view .scroll-bar:horizontal {
+    -fx-background-color: transparent;
+    -fx-background-radius: 30;
+}
+
+.table-view .scroll-bar:vertical .track,
+.table-view .scroll-bar:horizontal .track {
+    -fx-background-color: transparent;
+}
+
+.table-view .scroll-bar:vertical .thumb,
+.table-view .scroll-bar:horizontal .thumb {
+    -fx-background-color: rgba(0, 59, 54, 0.3); /* Verde escuro com transparência */
+    -fx-background-radius: 10;
+}
+
+.table-view .scroll-bar .increment-button,
+.table-view .scroll-bar .decrement-button {
+    -fx-background-color: transparent;
+    -fx-padding: 0;
+}
+
+.table-view .scroll-bar .increment-arrow,
+.table-view .scroll-bar .decrement-arrow {
+    -fx-shape: " ";
+    -fx-padding: 0;
+}
+
+/* Área de visualização da tabela */
+.table-view .virtual-flow {
+    -fx-background-color: transparent;
+}
+
+/* Botões em geral */
+.button {
+    -fx-cursor: hand;
+}
+
+/* Efeitos de foco */
+.button:focused,
+.text-field:focused {
+    -fx-focus-color: #003B36;
+    -fx-faint-focus-color: #003B3622;
+}
+
+/* Estilos para o formulário */
+.form-box {
+    -fx-background-color: #f9f9f9;
+    -fx-background-radius: 10;
+    -fx-border-radius: 10;
+    -fx-border-color: #ddd;
+    -fx-border-width: 1;
+    -fx-padding: 20;
+    -fx-spacing: 10;
+}
+
+.form-label {
+    -fx-font-family: 'Lexend';
+    -fx-font-size: 14px;
+    -fx-text-fill: #333;
+}
+
+.form-field {
+    -fx-font-family: 'Lexend';
+    -fx-font-size: 14px;
+    -fx-pref-width: 400px;
+    -fx-pref-height: 35px;
+    -fx-background-radius: 5;
+    -fx-border-radius: 5;
+    -fx-border-color: #ccc;
+    -fx-border-width: 1;
+    -fx-padding: 5;
+}
+
+.form-button {
+    -fx-font-family: 'Lexend';
+    -fx-font-size: 14px;
+    -fx-background-color: #4CAF50;
+    -fx-text-fill: white;
+    -fx-pref-width: 100px;
+    -fx-pref-height: 35px;
+    -fx-background-radius: 5;
+    -fx-border-radius: 5;
+    -fx-cursor: hand;
+}
+
+.form-button:hover {
+    -fx-background-color: #45a049;
+}
+
+/* Estilos para a tela de Encontros */
+
+/* Botão editar na tabela */
+.btn-editar {
+    -fx-background-color: #2196F3;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-padding: 5 15;
+    -fx-background-radius: 5;
+    -fx-border-radius: 5;
+    -fx-cursor: hand;
+}
+
+.btn-editar:hover {
+    -fx-background-color: #1976D2;
+}
+
+/* Botão cadastrar */
+.btn-cadastrar {
+    -fx-background-color: #4CAF50;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-padding: 10 25;
+    -fx-background-radius: 5;
+    -fx-border-radius: 5;
+    -fx-font-size: 14px;
+    -fx-cursor: hand;
+}
+
+.btn-cadastrar:hover {
+    -fx-background-color: #45a049;
+}
+
+/* Diálogos */
+.dialog-pane {
+    -fx-background-color: #f5f5f5;
+}
+
+.dialog-pane .header-panel {
+    -fx-background-color: #4CAF50;
+}
+
+.dialog-pane .header-panel .label {
+    -fx-text-fill: white;
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+}
+
+/* ListView */
+.list-view {
+    -fx-border-color: #ccc;
+    -fx-border-radius: 5;
+    -fx-background-radius: 5;
+}
+
+.list-view .list-cell {
+    -fx-padding: 10;
+}
+
+.list-view .list-cell:selected {
+    -fx-background-color: #4CAF50;
+    -fx-text-fill: white;
+}
+
+/* DatePicker */
+.date-picker {
+    -fx-font-size: 14px;
+}
+
+/* CheckBox */
+.check-box {
+    -fx-font-size: 14px;
+}
+
+/* Labels nos diálogos */
+.label {
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+}
+
+/* GridPane nos diálogos */
+.grid-pane {
+    -fx-background-color: #f9f9f9;
+    -fx-border-color: #ddd;
+    -fx-border-radius: 5;
+}
+
+/* Estilos para a tela de Encontros */
+
+/* Botão editar na tabela */
+.btn-editar {
+    -fx-background-color: #2196F3;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-padding: 5 15;
+    -fx-background-radius: 5;
+    -fx-border-radius: 5;
+    -fx-cursor: hand;
+}
+
+.btn-editar:hover {
+    -fx-background-color: #1976D2;
+}
+
+/* Botão cadastrar */
+.btn-cadastrar {
+    -fx-background-color: #4CAF50;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-padding: 10 25;
+    -fx-background-radius: 5;
+    -fx-border-radius: 5;
+    -fx-font-size: 14px;
+    -fx-cursor: hand;
+}
+
+.btn-cadastrar:hover {
+    -fx-background-color: #45a049;
+}

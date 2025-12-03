@@ -1,5 +1,6 @@
 package dao;
 
+import factory.ConnectionFactory;
 import model.ServicoEncontro;
 import java.sql.*;
 import java.util.ArrayList;
@@ -7,97 +8,155 @@ import java.util.List;
 
 public class ServicoEncontroDAO {
 
-    private Connection conn;
-
-    public ServicoEncontroDAO(Connection conn) {
-        this.conn = conn;
-    }
-
+    // -------------------------------------------
     // CREATE
-    public void inserir(ServicoEncontro se) throws SQLException {
+    // -------------------------------------------
+    public void inserir(ServicoEncontro se) {
         String sql = "INSERT INTO servicos_encontros (id_encontro, id_servico, id_mae_responsavel, descricao) VALUES (?, ?, ?, ?)";
 
-        PreparedStatement stmt = conn.prepareStatement(sql);
-
-        stmt.setInt(1, se.getId_encontro());
-        stmt.setInt(2, se.getId_servico());
-        stmt.setInt(3, se.getId_mae_responsavel());
-        stmt.setString(4, se.getDescricao());
-
-        stmt.executeUpdate();
-        stmt.close();
+        try (Connection conn = ConnectionFactory.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+            
+            stmt.setInt(1, se.getId_encontro());
+            stmt.setInt(2, se.getId_servico());
+            stmt.setInt(3, se.getId_mae_responsavel());
+            stmt.setString(4, se.getDescricao());
+            
+            stmt.executeUpdate();
+            
+        } catch (SQLException e) {
+            System.err.println("Erro ao inserir serviço de encontro: " + e.getMessage());
+            e.printStackTrace();
+        }
     }
 
     // READ by ID
-    public ServicoEncontro buscarPorId(int id) throws SQLException {
+    // -------------------------------------------
+    public ServicoEncontro buscarPorId(int id) {
         String sql = "SELECT * FROM servicos_encontros WHERE id_servico_encontro = ?";
-        PreparedStatement stmt = conn.prepareStatement(sql);
-        stmt.setInt(1, id);
+        ServicoEncontro servicoEncontro = null;
 
-        ResultSet rs = stmt.executeQuery();
-        ServicoEncontro se = null;
+        try (Connection conn = ConnectionFactory.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+            
+            stmt.setInt(1, id);
+            ResultSet rs = stmt.executeQuery();
 
-        if (rs.next()) {
-            se = new ServicoEncontro(
-                rs.getInt("id_servico_encontro"),
-                rs.getInt("id_encontro"),
-                rs.getInt("id_servico"),
-                rs.getInt("id_mae_responsavel"),
-                rs.getString("descricao")
-            );
+            if (rs.next()) {
+                servicoEncontro = new ServicoEncontro(
+                    rs.getInt("id_servico_encontro"),
+                    rs.getInt("id_encontro"),
+                    rs.getInt("id_servico"),
+                    rs.getInt("id_mae_responsavel"),
+                    rs.getString("descricao")
+                );
+            }
+            
+        } catch (SQLException e) {
+            System.err.println("Erro ao buscar serviço de encontro por ID: " + e.getMessage());
+            e.printStackTrace();
         }
 
-        rs.close();
-        stmt.close();
-        return se;
+        return servicoEncontro;
     }
 
+    // -------------------------------------------
     // READ ALL
-    public List<ServicoEncontro> listarTodos() throws SQLException {
+    // -------------------------------------------
+    public List<ServicoEncontro> listarTodos() {
         String sql = "SELECT * FROM servicos_encontros";
-        Statement stmt = conn.createStatement();
-        ResultSet rs = stmt.executeQuery(sql);
-
         List<ServicoEncontro> lista = new ArrayList<>();
 
-        while (rs.next()) {
-            lista.add(new ServicoEncontro(
-                rs.getInt("id_servico_encontro"),
-                rs.getInt("id_encontro"),
-                rs.getInt("id_servico"),
-                rs.getInt("id_mae_responsavel"),
-                rs.getString("descricao")
-            ));
+        try (Connection conn = ConnectionFactory.getConnection();
+             Statement stmt = conn.createStatement();
+             ResultSet rs = stmt.executeQuery(sql)) {
+            
+            while (rs.next()) {
+                lista.add(new ServicoEncontro(
+                    rs.getInt("id_servico_encontro"),
+                    rs.getInt("id_encontro"),
+                    rs.getInt("id_servico"),
+                    rs.getInt("id_mae_responsavel"),
+                    rs.getString("descricao")
+                ));
+            }
+            
+        } catch (SQLException e) {
+            System.err.println("Erro ao listar serviços de encontro: " + e.getMessage());
+            e.printStackTrace();
         }
 
-        rs.close();
-        stmt.close();
         return lista;
     }
 
+    // -------------------------------------------
     // UPDATE
-    public void atualizar(ServicoEncontro se) throws SQLException {
+    // -------------------------------------------
+    public void atualizar(ServicoEncontro se) {
         String sql = "UPDATE servicos_encontros SET id_encontro = ?, id_servico = ?, id_mae_responsavel = ?, descricao = ? WHERE id_servico_encontro = ?";
 
-        PreparedStatement stmt = conn.prepareStatement(sql);
-
-        stmt.setInt(1, se.getId_encontro());
-        stmt.setInt(2, se.getId_servico());
-        stmt.setInt(3, se.getId_mae_responsavel());
-        stmt.setString(4, se.getDescricao());
-        stmt.setInt(5, se.getId_servico_encontro());
-
-        stmt.executeUpdate();
-        stmt.close();
+        try (Connection conn = ConnectionFactory.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+            
+            stmt.setInt(1, se.getId_encontro());
+            stmt.setInt(2, se.getId_servico());
+            stmt.setInt(3, se.getId_mae_responsavel());
+            stmt.setString(4, se.getDescricao());
+            stmt.setInt(5, se.getId_servico_encontro());
+            stmt.executeUpdate();
+            
+        } catch (SQLException e) {
+            System.err.println("Erro ao atualizar serviço de encontro: " + e.getMessage());
+            e.printStackTrace();
+        }
     }
 
+    // -------------------------------------------
     // DELETE
-    public void excluir(int id) throws SQLException {
+    // -------------------------------------------
+    public void excluir(int id) {
         String sql = "DELETE FROM servicos_encontros WHERE id_servico_encontro = ?";
-        PreparedStatement stmt = conn.prepareStatement(sql);
 
-        stmt.setInt(1, id);
-        stmt.executeUpdate();
-        stmt.close();
+        try (Connection conn = ConnectionFactory.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+            
+            stmt.setInt(1, id);
+            stmt.executeUpdate();
+            
+        } catch (SQLException e) {
+            System.err.println("Erro ao excluir serviço de encontro: " + e.getMessage());
+            e.printStackTrace();
+        }
+    }
+    
+    // -------------------------------------------
+    // READ BY ENCONTRO
+    // -------------------------------------------
+    public List<ServicoEncontro> buscarPorEncontro(int idEncontro) {
+        String sql = "SELECT * FROM servicos_encontros WHERE id_encontro = ?";
+        List<ServicoEncontro> lista = new ArrayList<>();
+
+        try (Connection conn = ConnectionFactory.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+            
+            stmt.setInt(1, idEncontro);
+            ResultSet rs = stmt.executeQuery();
+
+            while (rs.next()) {
+                lista.add(new ServicoEncontro(
+                    rs.getInt("id_servico_encontro"),
+                    rs.getInt("id_encontro"),
+                    rs.getInt("id_servico"),
+                    rs.getInt("id_mae_responsavel"),
+                    rs.getString("descricao")
+                ));
+            }
+            
+        } catch (SQLException e) {
+            System.err.println("Erro ao buscar serviços do encontro: " + e.getMessage());
+            e.printStackTrace();
+        }
+
+        return lista;
     }
 }
